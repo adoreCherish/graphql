@@ -12,7 +12,11 @@ var _babelPolyfill = require('babel-polyfill');
 
 var _babelPolyfill2 = _interopRequireDefault(_babelPolyfill);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
 
 var Koa = require('koa');
 // import koaBody from 'koa-bodyparser';
@@ -34,9 +38,15 @@ var dataQuery = {
 var userType = new _graphql.GraphQLObjectType({
     name: 'User',
     fields: {
-        id: { type: _graphql.GraphQLString },
-        name: { type: _graphql.GraphQLString },
-        age: { type: _graphql.GraphQLInt }
+        id: {
+            type: _graphql.GraphQLString
+        },
+        name: {
+            type: _graphql.GraphQLString
+        },
+        age: {
+            type: _graphql.GraphQLInt
+        }
     }
 });
 var myGraphQLSchema = new _graphql.GraphQLSchema({
@@ -46,7 +56,9 @@ var myGraphQLSchema = new _graphql.GraphQLSchema({
             user: {
                 type: userType,
                 args: {
-                    id: { type: _graphql.GraphQLString }
+                    id: {
+                        type: _graphql.GraphQLString
+                    }
                 },
                 resolve: function resolve(_, args) {
                     return dataQuery[args.id];
@@ -61,8 +73,10 @@ var app = new Koa();
 
 var router = require('koa-simple-router');
 
-app.use(router(function (_) {
-    _.get('/graphql', (0, _graphqlServerKoa.graphqlKoa)({ schema: myGraphQLSchema }));
+app.use(router(function(_) {
+    _.get('/graphql', (0, _graphqlServerKoa.graphqlKoa)({
+        schema: myGraphQLSchema
+    }));
 }));
 
 // app.use(koaBody());
@@ -70,6 +84,6 @@ app.use(router(function (_) {
 // router.get('/graphql',graphqlKoa({ schema: myGraphQLSchema }));
 // app.use(router.routes());
 // app.use(router.allowedMethods());
-app.listen(3000, function () {
+app.listen(3000, function() {
     console.log('running at port 3000');
 });
